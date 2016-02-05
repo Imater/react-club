@@ -16,7 +16,7 @@ export class Items extends Component {
 
   resize() {
     const listWidth = this.refs.items.offsetWidth;
-    const itemsInRow = Math.floor(listWidth / 300);
+    const itemsInRow = Math.floor(listWidth / 200);
     const itemSize = 100 / itemsInRow + '%';
     this.setState({
       itemSize,
