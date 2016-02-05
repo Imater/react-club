@@ -5,16 +5,19 @@ export class Items extends Component {
     super(props);
   }
 
+  componentWillMount() {
+  }
+
   componentDidMount() {
-    window.addEventListener('resize', this.resize.bind(this));
-    this.resize();
+    window.addEventListener('resize', this._resize.bind(this));
+    this._resize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize.bind(this));
+    window.removeEventListener('resize', this._resize.bind(this));
   }
 
-  resize() {
+  _resize() {
     const listWidth = this.refs.items.offsetWidth;
     const itemsInRow = Math.floor(listWidth / 200);
     const itemSize = 100 / itemsInRow + '%';

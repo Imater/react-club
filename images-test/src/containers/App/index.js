@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import R from 'ramda';
 
-const images = R.range(1, 40).map(i => `http://lorempixel.com/g/300/${300 + i}/`);
+const images = R.range(0, 4).map(i => `http://lorempixel.com/g/300/${300 + i}/`);
 
 /* application components */
 import { Fixed } from 'components/Fixed';

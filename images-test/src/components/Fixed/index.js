@@ -2,26 +2,33 @@ import React, { Component } from 'react';
 
 import { styles } from './styles.scss';
 
+import { itemsMenu } from './settings.js';
+
 export class Fixed extends Component {
+  _renderItem(item, key) {
+    return (
+      <li key={key}>
+        {item}
+      </li>
+    );
+  }
+
+  _renderMenu() {
+    return itemsMenu.map((item, key) => {
+      return (
+        this._renderItem.bind(this, item, key)()
+      );
+    });
+  }
+
   render() {
+
     return (
       <section className={styles}>
         <ul>
-          <li>
-            Главная
-          </li>
-          <li>
-            10 записей
-          </li>
-          <li>
-            20 записей
-          </li>
-          <li>
-            30 записей
-          </li>
-          <li>
-            40 записей
-          </li>
+          {
+            this._renderMenu.bind(this)()
+          }
         </ul>
       </section>
     );
