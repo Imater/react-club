@@ -1,0 +1,8 @@
+:local(.styles) {
+  .item {
+    border: 5px solid #EEE;
+    &.active {
+      border: 5px solid green;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import { styles } from './styles.scss';
 
@@ -7,8 +7,11 @@ import { itemsMenu } from './settings.js';
 export class Fixed extends Component {
   _renderItem(item, key) {
     return (
-      <li key={key}>
-        {item}
+      <li
+        key={key}
+        onClick={this._onClick.bind(this, item.count)}
+      >
+        {item.name}
       </li>
     );
   }
@@ -21,11 +24,14 @@ export class Fixed extends Component {
     });
   }
 
-  render() {
+  _onClick(cnt) {
+    this.props.changeCount(cnt);
+  }
 
+  render() {
     return (
       <section className={styles}>
-        <ul>
+        <ul >
           {
             this._renderMenu.bind(this)()
           }
@@ -34,3 +40,9 @@ export class Fixed extends Component {
     );
   }
 }
+
+Fixed.propTypes = {
+  changeCount: PropTypes.func.isRequired,
+};
+
+

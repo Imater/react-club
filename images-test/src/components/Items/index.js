@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+
+import { styles } from './items.scss';
 
 export class Items extends Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillMount() {
-  }
-
   componentDidMount() {
     window.addEventListener('resize', this._resize.bind(this));
     this._resize();
+    setTimeout(() => {
+      const element = this.refs[`image${1}`];
+      element.classList.add('active');
+    });
   }
 
   componentWillUnmount() {
@@ -19,11 +22,18 @@ export class Items extends Component {
 
   _resize() {
     const listWidth = this.refs.items.offsetWidth;
-    const itemsInRow = Math.floor(listWidth / 200);
+    const averageSize = this.props.width;
+    const itemsInRow = Math.floor(listWidth / averageSize);
     const itemSize = 100 / itemsInRow + '%';
     this.setState({
       itemSize,
     });
+  }
+
+  _onClick(index) {
+    const element = this.refs[`image${index}`];
+    element.classList.add('active');
+    console.info(index);
   }
 
   renderItem(item, index) {
@@ -39,21 +49,35 @@ export class Items extends Component {
     };
 
     return (
-      <div style={style} key={index}></div>
+      <div
+        className="item"
+        style={style}
+        key={index}
+        ref={`image${index}`}
+        onClick={this._onClick.bind(this, index)}
+      >
+      </div>
     );
   }
 
   render() {
-    const { images } = this.props;
+    const { images, count } = this.props;
+    const imagesFiltered = images.filter((el, key) => {
+      return key < count;
+    });
 
     return (
-      <section id="items" ref="items" style={{
-        paddingLeft: '150px',
-        position: 'relative',
+      <section
+        id="items"
+        ref="items"
+        className={styles}
+        style={{
+          paddingLeft: '150px',
+          position: 'relative',
       }}
       >
         {
-          this.state && images.map(this.renderItem.bind(this))
+          this.state && imagesFiltered.map(this.renderItem.bind(this))
         }
       </section>
     );
@@ -61,5 +85,12 @@ export class Items extends Component {
 }
 
 Items.propTypes = {
-  images: React.PropTypes.array,
+  images: PropTypes.array,
+  width: PropTypes.number,
 };
+
+Items.defaultProps = {
+  width: 50,
+};
+
+
