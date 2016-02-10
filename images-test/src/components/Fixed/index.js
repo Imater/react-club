@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-
+import { Link } from 'react-router';
 import { styles } from './styles.scss';
 
 import { itemsMenu } from './settings.js';
 
 export class Fixed extends Component {
   _renderItem(item, key) {
+    const width = 100*(key+1);
     return (
       <li
         key={key}
-        onClick={this._onClick.bind(this, item.count)}
       >
-        {item.name}
+        <Link to={`/media/${width}/${item.count}`}>{item.name}</Link>
       </li>
     );
   }

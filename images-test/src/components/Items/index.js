@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
 import { styles } from './items.scss';
+import R from 'ramda';
+
+const images = R.range(0, 100).map(i => `http://lorempixel.com/g/300/${300 + i}/`);
 
 export class Items extends Component {
   constructor(props) {
@@ -10,10 +13,13 @@ export class Items extends Component {
   componentDidMount() {
     window.addEventListener('resize', this._resize.bind(this));
     this._resize();
-    setTimeout(() => {
-      const element = this.refs[`image${1}`];
-      element.classList.add('active');
-    });
+
+  }
+  componentWillReceiveProps() {
+    setTimeout(()=>{
+      this._resize();
+    })
+    console.info(1)
   }
 
   componentWillUnmount() {
@@ -22,7 +28,7 @@ export class Items extends Component {
 
   _resize() {
     const listWidth = this.refs.items.offsetWidth;
-    const averageSize = this.props.width;
+    const averageSize = this.props.params.width;
     const itemsInRow = Math.floor(listWidth / averageSize);
     const itemSize = 100 / itemsInRow + '%';
     this.setState({
@@ -61,7 +67,7 @@ export class Items extends Component {
   }
 
   render() {
-    const { images, count } = this.props;
+    const { count } = this.props.params;
     const imagesFiltered = images.filter((el, key) => {
       return key < count;
     });
@@ -83,14 +89,5 @@ export class Items extends Component {
     );
   }
 }
-
-Items.propTypes = {
-  images: PropTypes.array,
-  width: PropTypes.number,
-};
-
-Items.defaultProps = {
-  width: 50,
-};
 
 

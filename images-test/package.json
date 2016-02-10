@@ -70,7 +70,9 @@
   },
   "dependencies": {
     "babel-preset-react-hmre": "^1.0.1",
+    "history": "^2.0.0",
     "jquery": "^2.2.0",
-    "react": "^0.14.2"
+    "react": "^0.14.2",
+    "react-router": "^2.0.0"
   }
 }
