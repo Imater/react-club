@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
 import { styles } from './items.scss';
-import R from 'ramda';
 
-const images = R.range(0, 100).map(i => `http://lorempixel.com/g/300/${300 + i}/`);
-
-export class Items extends Component {
+export default class Items extends Component {
   constructor(props) {
     super(props);
   }
@@ -67,10 +64,8 @@ export class Items extends Component {
   }
 
   render() {
-    const { count } = this.props.params;
-    const imagesFiltered = images.filter((el, key) => {
-      return key < count;
-    });
+    const { images, changeCount, loadAll, params: { count } } = this.props;
+    console.info(changeCount);
 
     return (
       <section
@@ -82,8 +77,17 @@ export class Items extends Component {
           position: 'relative',
       }}
       >
+        <button onClick={changeCount.bind(this, 3)} type="button">
+          changeCount(3)
+        </button>
+        <button onClick={changeCount.bind(this, 10)} type="button">
+          changeCount(10)
+        </button>
+        <button onClick={loadAll.bind(this)} type="button">
+          loadAll()
+        </button>
         {
-          this.state && imagesFiltered.map(this.renderItem.bind(this))
+          this.state && images.map(this.renderItem.bind(this))
         }
       </section>
     );
