@@ -10,7 +10,7 @@ export class App extends Component {
     width: 100
   };
 
-  changeCount(cnt = 10) {
+  changeCount(cnt = 20) {
     this.setState({
       count: cnt
     });

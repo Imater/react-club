@@ -6,7 +6,7 @@ import { itemsMenu } from './settings.js';
 
 export class Fixed extends Component {
   _renderItem(item, key) {
-    const width = 100*(key+1);
+    const width = 100;
     return (
       <li
         key={key}

@@ -1,6 +1,8 @@
+import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 
 import { styles } from './items.scss';
+
 
 export default class Items extends Component {
   constructor(props) {
@@ -16,7 +18,6 @@ export default class Items extends Component {
     setTimeout(()=>{
       this._resize();
     })
-    console.info(1)
   }
 
   componentWillUnmount() {
@@ -33,12 +34,6 @@ export default class Items extends Component {
     });
   }
 
-  _onClick(index) {
-    const element = this.refs[`image${index}`];
-    element.classList.add('active');
-    console.info(index);
-  }
-
   renderItem(item, index) {
     const { itemSize } = this.state;
 
@@ -52,14 +47,13 @@ export default class Items extends Component {
     };
 
     return (
-      <div
-        className="item"
-        style={style}
-        key={index}
-        ref={`image${index}`}
-        onClick={this._onClick.bind(this, index)}
-      >
-      </div>
+      <Link to={`/fullscreen/${index}`} key={index}>
+        <div
+          className="item"
+          style={style}
+          >
+        </div>
+      </Link>
     );
   }
 
