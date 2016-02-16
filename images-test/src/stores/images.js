@@ -3,7 +3,6 @@ import { fromJS } from 'immutable';
 export const IMAGES_COUNT = 'IMAGES_COUNT';
 export const LOAD_ALL = 'LOAD_ALL';
 import R from 'ramda';
-const images = R.range(0, 100).map(i => `http://lorempixel.com/g/300/${300 + i}/`);
 
 const defaultState = {
   images: fromJS([])
@@ -16,8 +15,7 @@ export default function(state = defaultState, action) {
         return key < action.payload.count
       });
     case LOAD_ALL:
-      console.info('action load all');
-      return fromJS(images);
+      return fromJS(action.payload.images);
     default:
       return state;
   }
@@ -33,6 +31,13 @@ export function changeCount(count = 10) {
 export function loadAll() {
   return {
     type: LOAD_ALL,
-    payload: {}
+    payload: new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const images = R.range(0, 100).map(i => `http://lorempixel.com/g/300/${300 + i}/`);
+        resolve({
+          images: images
+        });
+      }, 2000);
+    })
   }
 }

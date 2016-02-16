@@ -12,7 +12,9 @@ export default class Items extends Component {
   componentDidMount() {
     window.addEventListener('resize', this._resize.bind(this));
     this._resize();
-
+    setTimeout(()=>{
+      this.props.loadAll();
+    });
   }
   componentWillReceiveProps() {
     setTimeout(()=>{
@@ -59,7 +61,6 @@ export default class Items extends Component {
 
   render() {
     const { images, changeCount, loadAll, params: { count } } = this.props;
-    console.info(changeCount);
 
     return (
       <section
