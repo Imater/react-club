@@ -35,6 +35,9 @@ export class Fixed extends Component {
           {
             this._renderMenu.bind(this)()
           }
+          <li>
+            <Link to="/tabs/0">Tabs</Link>
+          </li>
         </ul>
       </section>
     );

@@ -1,0 +1,27 @@
+:local(.styles) {
+  margin-left: 150px;
+  padding: 20px;
+  ul.tabs {
+    margin: 0;
+    padding: 0;
+    li {
+      list-style: none;
+      display: inline-block;
+      vertical-align: top;
+      padding: 5px 10px;
+      background: #ccc;
+
+      &.active {
+        background: #333 !important;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+  .tabContent {
+    background: #aaa;
+    min-height: 300px;
+    padding: 10px;
+  }
+}

@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "babel-preset-react-hmre": "^1.0.1",
+    "classnames": "^2.2.3",
     "history": "^2.0.0",
     "immutable": "^3.7.6",
     "jquery": "^2.2.0",
